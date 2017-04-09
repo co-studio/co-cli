@@ -1,0 +1,19 @@
+{
+  "name": "co-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Logan Bernard",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "mkdirp": "^0.5.1",
+    "parent-package-json": "^2.0.0"
+  },
+  "bin": {
+    "co": "index.js"
+  }
+}
