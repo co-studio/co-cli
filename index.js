@@ -16,9 +16,13 @@ const statelessTemplate = require('./lib/react/stateless')
 //
 const reactComponentDescription = `Scaffold React components in: \n\t- index.scss \n\t- /components`
 const handleReactComponent = (componentName, options) => {
-  const projectRoot = packagePath() || '.'
+  const { path } = packagePath()
+  const root = (path)
+    ? path.substring(0, path.lastIndexOf('/'))
+    : '.' // default to current dir
+
   const components = '/src/components/'
-  const dirpath = projectRoot + components + componentName
+  const dirpath = root + components + componentName
 
   mkdirp(dirpath, (err) => {
     if (err) throw err
@@ -38,12 +42,13 @@ const handleReactComponent = (componentName, options) => {
     // Create component SASS file
     fs.open(`${dirpath}/${componentName}.scss`, 'ax', (err, fd) => {
       if (err) throw err
+      fs.write(fd, `@import '../../variables.scss';`)
     })
 
     // Import component SASS in index
-    fs.open(`${projectRoot}/src/index.scss`, 'a', (err, fd) => {
+    fs.open(`${root}/src/index.scss`, 'a', (err, fd) => {
       if (err) throw err
-      fs.write(fd, '\n' + `@import './components/${componentName}/${componentName}.scss;'`)
+      fs.write(fd, '\n' + `@import './components/${componentName}/${componentName}.scss';`)
     })
   })
 }
