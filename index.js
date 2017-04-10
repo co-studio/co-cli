@@ -14,6 +14,7 @@ const statelessTemplate = require('./lib/react/stateless')
 // ==================================================
 // ==================================================
 //
+
 const reactComponentDescription = `Scaffold React components in: \n\t- index.scss \n\t- /components`
 const handleReactComponent = (componentName, options) => {
   const { path } = packagePath()
